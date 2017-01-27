@@ -1,6 +1,6 @@
 ## ES6 （ES2015）
 
-<img src="https://cdn-images-1.medium.com/max/800/1*raWO3dhM4jMjf9VY-kZzNg.png" alt="modern_js_pic">
+<img src="https://cdn-images-1.medium.com/max/800/1*raWO3dhM4jMjf9VY-kZzNg.png" alt="modern_js_pic" height="400">
 
 ### 概要
 
@@ -68,7 +68,7 @@
 #### モジュールシステム
 
 - Browserify、Webpackなど
-- ES6ではモジュールシステム(import/export)があるが、そのままだと大量のファリうこれを事前に開発環境側で静的解析しガッチャンコして配布する仕組み
+- ES6ではモジュールシステム(import/export)があるため、必要なモジュールを事前に開発環境側で静的解析しガッチャンコして配布する仕組み
 
 
 ### 参考
