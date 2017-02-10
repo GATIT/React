@@ -1,27 +1,32 @@
 [
     {
+        "text": "Hey there!",
         "id": 1388534400000,
-        "author": "Pete Hunt",
-        "text": "Hey there!"
+        "author": "Pete Hunt"
     },
     {
+        "text": "React is *great*!",
         "id": 1420070400000,
-        "author": "Paul O’Shannessy",
-        "text": "React is *great*!"
+        "author": "Paul O\u2019Shannessy"
     },
     {
-        "id": 1464988635157,
-        "author": "ben",
-        "text": "*abc*"
+        "text": "\u3042\u3044\u3046\u3048\u304a",
+        "id": 9999999999999,
+        "author": "ABCDEFG"
     },
     {
-        "id": 1464988636500,
-        "author": "ben",
-        "text": "*abc*"
+        "text": "hogehoge",
+        "id": 1486722500831,
+        "author": "TestUser"
     },
     {
-        "id": 1464988717637,
-        "author": "evil",
-        "text": "<a href=\"javascript:alert(1)\">alert(1)</a>"
+        "text": "asdf",
+        "id": 1486722625112,
+        "author": "afda"
+    },
+    {
+        "text": "hogehoge",
+        "id": 1486722727061,
+        "author": "TestUser"
     }
 ]
