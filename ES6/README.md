@@ -21,6 +21,7 @@
 - アロー関数による関数宣言
 
 - 分割代入
+
 	```javascript
 	var name = Izmeal;
 	var age  = 21;	
@@ -30,6 +31,7 @@
 	```var [name, age] = ['Koyabu', 20];```
 
 - 配列展開
+
 	引数展開のようなもの
   ```
   var array = [1, 2, 3];
@@ -37,13 +39,16 @@
   ```
 	
 - 関数のデフォルト引数
+
 	```
 	function multiply(a, b = 1) {
   		return a*b;
 	}
 	multiply(5); // 5
 	```
+
 - テンプレート文字列
+
 	```
 	var name = 'Koyabu'
 	var hello = `My name is ${name}`
@@ -72,6 +77,7 @@
 
 
 ### 参考
+
 - [ES2015 (ES6)についてのまとめ](http://qiita.com/tuno-tky/items/74ca595a9232bcbcd727)
 
 - [春からはじめるモダンJavaScript / ES2015](http://qiita.com/mizchi/items/3bbb3f466a3b5011b509)
