@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React Tutorial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script> </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel">
+
+//入力フォーム全体
+var Form = React.createClass({
+  getInitialState() {
+    return {
+      candidates: []
+    };
+  },
+  handleSuggest: function(text) {
+    this.setState({
+      candidates: this.props.data.filter(function(country){
+        return country.name.indexOf(text) != -1;
+      })
+    });
+  }, 
+  render: function() {
+    return (
+      <div className="InputForm">
+        <h1>Reactサンプル ─ サジェスト</h1>
+        <h2>国名を入力して下さい</h2>
+        <Inputs onTextChanged={this.handleSuggest}/>
+        <Suggest candidates={this.state.candidates}/>
+      </div>
+    );
+  }
+});
+
+// 入力欄
+var Inputs = React.createClass({
+  getInitialState() {
+    return {
+      textValue: ""
+    };
+  },
+  changeText(e) {
+    this.setState({textValue: e.target.value});
+    this.props.onTextChanged(this.state.textValue);
+  },
+  render: function(){
+    return (
+      <form className="inputForm">
+        <input type="text" placeholder="国名" ref="countryName" value={this.state.textValue} onChange={this.changeText}/>
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
+});
+
+// サジェストの一つ一つの国
+var Country = React.createClass({
+  render: function() {
+    return (
+      <div className="country">
+        {this.props.name}
+      </div>
+    );
+  }
+});
+
+// サジェスト
+var Suggest = React.createClass({
+  render: function() {
+    var countryNodes = this.props.candidates.map(function(country) {
+      return (
+        <Country name={country.name} key={country.id} />
+      );
+    });
+    return (
+      <div className="suggest">
+        {countryNodes}
+      </div>
+    );
+  }
+});
+
+
+// {{{
+var data = [
+  {id: 1,  name: "アイスランド共和国"},
+  {id: 2,  name: "アイルランド"},
+  {id: 3,  name: "アゼルバイジャン共和国"},
+  {id: 4,  name: "アフガニスタン・イスラム共和国"},
+  {id: 5,  name: "アメリカ合衆国"},
+  {id: 6,  name: "アラブ首長国連邦"},
+  {id: 7,  name: "アルジェリア民主人民共和国 アルゼンチン共和国"},
+  {id: 8,  name: "アルバニア共和国"},
+  {id: 9,  name: "アルメニア共和国"},
+  {id: 10,  name: "アンゴラ共和国"},
+  {id: 11,  name: "アンティグア・バーブーダ"},
+  {id: 12,  name: "アンドラ公国"},
+  {id: 13,  name: "イエメン共和国"},
+  {id: 14,  name: "イスラエル国"},
+  {id: 15,  name: "イタリア共和国"},
+  {id: 16,  name: "イラク共和国"},
+  {id: 17,  name: "イラン・イスラム共和国"},
+  {id: 18,  name: "インド"},
+  {id: 19,  name: "インドネシア共和国"},
+  {id: 20,  name: "ウガンダ共和国"},
+  {id: 21,  name: "ウクライナ"},
+  {id: 22,  name: "ウズベキスタン共和国"},
+  {id: 23,  name: "ウルグアイ東方共和国"},
+  {id: 24,  name: "英国（グレートブリテン及び北アイルランド連合王国）"},
+  {id: 25,  name: "エクアドル共和国"},
+  {id: 26,  name: "エジプト・アラブ共和国"},
+  {id: 27,  name: "エストニア共和国"},
+  {id: 28,  name: "エチオピア連邦民主共和国"},
+  {id: 29,  name: "エリトリア国"},
+  {id: 30,  name: "エルサルバドル共和国"},
+  {id: 31,  name: "オーストラリア連邦"},
+  {id: 32,  name: "オーストリア共和国"},
+  {id: 33,  name: "オマーン国"},
+  {id: 34,  name: "オランダ王国"},
+  {id: 35,  name: "ガイアナ共和国"},
+  {id: 36,  name: "カザフスタン共和国"},
+  {id: 37,  name: "カタール国"},
+  {id: 38,  name: "ガーナ共和国"},
+  {id: 39,  name: "カナダ"},
+  {id: 40,  name: "カーボヴェルデ共和国"},
+  {id: 41,  name: "ガボン共和国"},
+  {id: 42,  name: "カメルーン共和国"},
+  {id: 43,  name: "ガンビア・イスラム共和国"},
+  {id: 44,  name: "カンボジア王国"},
+  {id: 45,  name: "ギニア共和国"},
+  {id: 46,  name: "ギニアビサウ共和国"},
+  {id: 47,  name: "キプロス共和国"},
+  {id: 48,  name: "キューバ共和国"},
+  {id: 49,  name: "ギリシャ共和国"},
+  {id: 50,  name: "キリバス共和国"},
+  {id: 51,  name: "キルギス共和国"},
+  {id: 52,  name: "グアテマラ共和国"},
+  {id: 53,  name: "クウェート国"},
+  {id: 54,  name: "クック諸島"},
+  {id: 55,  name: "グレナダ"},
+  {id: 56,  name: "クロアチア共和国"},
+  {id: 57,  name: "ケニア共和国"},
+  {id: 58,  name: "コスタリカ共和国"},
+  {id: 59,  name: "コソボ共和国"},
+  {id: 60,  name: "コートジボワール共和国"},
+  {id: 61,  name: "コモロ連合"},
+  {id: 62,  name: "コロンビア共和国"},
+  {id: 63,  name: "コンゴ共和国"},
+  {id: 64,  name: "コンゴ民主共和国"},
+  {id: 65,  name: "サウジアラビア王国"},
+  {id: 66,  name: "サモア独立国"},
+  {id: 67,  name: "サントメ・プリンシペ民主共和国"},
+  {id: 68,  name: "ザンビア共和国"},
+  {id: 69,  name: "サンマリノ共和国"},
+  {id: 70,  name: "シエラレオネ共和国"},
+  {id: 71,  name: "ジブチ共和国"},
+  {id: 72,  name: "ジャマイカ"},
+  {id: 73,  name: "ジョージア"},
+  {id: 74,  name: "シリア・アラブ共和国"},
+  {id: 75,  name: "シンガポール共和国"},
+  {id: 76,  name: "ジンバブエ共和国"},
+  {id: 77,  name: "スイス連邦"},
+  {id: 78,  name: "スウェーデン王国"},
+  {id: 79,  name: "スーダン共和国"},
+  {id: 80,  name: "スペイン"},
+  {id: 81,  name: "スリナム共和国"},
+  {id: 82,  name: "スリランカ民主社会主義共和国"},
+  {id: 83,  name: "スロバキア共和国"},
+  {id: 84,  name: "スロベニア共和国"},
+  {id: 85,  name: "スワジランド王国"},
+  {id: 86,  name: "赤道ギニア共和国"},
+  {id: 87,  name: "セーシェル共和国"},
+  {id: 88,  name: "セネガル共和国"},
+  {id: 89,  name: "セルビア共和国"},
+  {id: 90,  name: "セントクリストファー・ネーヴィス"},
+  {id: 91,  name: "セントビンセント及びグレナディーン諸島"},
+  {id: 92,  name: "セントルシア"},
+  {id: 93,  name: "ソマリア連邦共和国"},
+  {id: 94,  name: "ソロモン諸島"},
+  {id: 95,  name: "タイ王国"},
+  {id: 96,  name: "大韓民国"},
+  {id: 97,  name: "タジキスタン共和国"},
+  {id: 98,  name: "タンザニア連合共和国"},
+  {id: 99,  name: "チェコ共和国"},
+  {id: 100,  name: "チャド共和国"},
+  {id: 101,  name: "中央アフリカ共和国"},
+  {id: 102,  name: "中華人民共和国"},
+  {id: 103,  name: "チュニジア共和国"},
+  {id: 104,  name: "チリ共和国"},
+  {id: 105,  name: "ツバル"},
+  {id: 106,  name: "デンマーク王国"},
+  {id: 107,  name: "ドイツ連邦共和国"},
+  {id: 108,  name: "トーゴ共和国"},
+  {id: 109,  name: "ドミニカ国"},
+  {id: 110,  name: "ドミニカ共和国"},
+  {id: 111,  name: "トリニダード・トバゴ共和国"},
+  {id: 112,  name: "トルクメニスタン"},
+  {id: 113,  name: "トルコ共和国"},
+  {id: 114,  name: "トンガ王国"},
+  {id: 115,  name: "ナイジェリア連邦共和国"},
+  {id: 116,  name: "ナウル共和国"},
+  {id: 117,  name: "ナミビア共和国"},
+  {id: 118,  name: "ニウエ"},
+  {id: 119,  name: "ニカラグア共和国"},
+  {id: 120,  name: "ニジェール共和国"},
+  {id: 121,  name: "ニュージーランド"},
+  {id: 122,  name: "ネパール連邦民主共和国"},
+  {id: 123,  name: "ノルウェー王国"},
+  {id: 124,  name: "ハイチ共和国"},
+  {id: 125,  name: "パキスタン・イスラム共和国"},
+  {id: 126,  name: "バチカン市国"},
+  {id: 127,  name: "パナマ共和国"},
+  {id: 128,  name: "バヌアツ共和国"},
+  {id: 129,  name: "バハマ国"},
+  {id: 130,  name: "パプアニューギニア独立国"},
+  {id: 131,  name: "パラオ共和国"},
+  {id: 132,  name: "パラグアイ共和国"},
+  {id: 133,  name: "バルバドス"},
+  {id: 134,  name: "バーレーン王国"},
+  {id: 135,  name: "ハンガリー"},
+  {id: 136,  name: "バングラデシュ人民共和国"},
+  {id: 137,  name: "東ティモール民主共和国"},
+  {id: 138,  name: "フィジー共和国"},
+  {id: 139,  name: "フィリピン共和国"},
+  {id: 140,  name: "フィンランド共和国"},
+  {id: 141,  name: "ブータン王国"},
+  {id: 142,  name: "ブラジル連邦共和国"},
+  {id: 143,  name: "フランス共和国"},
+  {id: 144,  name: "ブルガリア共和国"},
+  {id: 145,  name: "ブルキナファソ"},
+  {id: 146,  name: "ブルネイ・ダルサラーム国"},
+  {id: 147,  name: "ブルンジ共和国"},
+  {id: 148,  name: "ベトナム社会主義共和国"},
+  {id: 149,  name: "ベナン共和国"},
+  {id: 150,  name: "ベネズエラ・ボリバル共和国"},
+  {id: 151,  name: "ベラルーシ共和国"},
+  {id: 152,  name: "ベリーズ"},
+  {id: 153,  name: "ペルー共和国"},
+  {id: 154,  name: "ベルギー王国"},
+  {id: 155,  name: "ボスニア・ヘルツェゴビナ"},
+  {id: 156,  name: "ボツワナ共和国"},
+  {id: 157,  name: "ポーランド共和国"},
+  {id: 158,  name: "ボリビア多民族国"},
+  {id: 159,  name: "ポルトガル共和国"},
+  {id: 160,  name: "ホンジュラス共和国"},
+  {id: 161,  name: "マケドニア旧ユーゴスラビア共和国"},
+  {id: 162,  name: "マーシャル諸島共和国"},
+  {id: 163,  name: "マダガスカル共和国"},
+  {id: 164,  name: "マラウイ共和国"},
+  {id: 165,  name: "マリ共和国"},
+  {id: 166,  name: "マルタ共和国"},
+  {id: 167,  name: "マレーシア"},
+  {id: 168,  name: "ミクロネシア連邦"},
+  {id: 169,  name: "南アフリカ共和国"},
+  {id: 170,  name: "南スーダン共和国"},
+  {id: 171,  name: "ミャンマー連邦共和国"},
+  {id: 172,  name: "メキシコ合衆国"},
+  {id: 173,  name: "モザンビーク共和国"},
+  {id: 174,  name: "モナコ公国"},
+  {id: 175,  name: "モーリシャス共和国"},
+  {id: 176,  name: "モーリタニア・イスラム共和国"},
+  {id: 177,  name: "モルディブ共和国"},
+  {id: 178,  name: "モルドバ共和国"},
+  {id: 179,  name: "モロッコ王国"},
+  {id: 180,  name: "モンゴル国"},
+  {id: 181,  name: "モンテネグロ"},
+  {id: 182,  name: "ヨルダン・ハシェミット王国"},
+  {id: 183,  name: "ラオス人民民主共和国"},
+  {id: 184,  name: "ラトビア共和国"},
+  {id: 185,  name: "リトアニア共和国"},
+  {id: 186,  name: "リビア"},
+  {id: 187,  name: "リヒテンシュタイン公国"},
+  {id: 188,  name: "リベリア共和国"},
+  {id: 189,  name: "ルクセンブルク大公国"},
+  {id: 190,  name: "ルーマニア"},
+  {id: 191,  name: "ルワンダ共和国"},
+  {id: 192,  name: "レソト王国"},
+  {id: 193,  name: "レバノン共和国"},
+  {id: 194,  name: "ロシア連邦"},
+  {id: 195,  name: "北朝鮮"},
+  {id: 196,  name: "台湾"},
+  {id: 197,  name: "パレスチナ自治政府"},
+  {id: 198,  name: "香港"},
+  {id: 199,  name: "マカオ"},
+  {id: 200,  name: "北極"},
+  {id: 201,  name: "南極"}
+];
+// }}}
+
+// フォームをレンダリング
+ReactDOM.render(<Form data={data} />, document.getElementById('content'));
+
+    </script>
+  </body>
+</html>
